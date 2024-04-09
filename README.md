@@ -41,3 +41,38 @@ if(!function_exists('get_client_real_ip')){
   }
 }
 ```
+
+## Get Media File Type From URL
+
+```php
+if (!function_exists('get_file_type_from_url')) {
+    function get_file_type_from_url(string $url, string $default = 'file'): string
+    {
+        $ext = pathinfo($url, PATHINFO_EXTENSION);
+        if (in_array($ext, ['jpg', 'jpeg', 'jpe', 'gif', 'png', 'webp'])) {
+            return 'image';
+        }
+
+        if (in_array($ext, wp_get_audio_extensions())) {
+            return 'audio';
+        }
+
+        if (in_array($ext, wp_get_video_extensions())) {
+            return 'video';
+        }
+
+        return $default;
+    }
+}
+```
+
+## Get Datetime  in GMT ISO8601 format
+
+```php
+if (!function_exists('gmt_iso8601')) {
+    function gmt_iso8601($time)
+    {
+        return (new \DateTime(null, new \DateTimeZone('UTC')))->setTimestamp($time)->format('Y-m-d\TH:i:s\Z');
+    }
+}
+```
