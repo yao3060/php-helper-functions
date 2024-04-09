@@ -70,9 +70,9 @@ if (!function_exists('get_file_type_from_url')) {
 
 ```php
 if (!function_exists('gmt_iso8601')) {
-    function gmt_iso8601($time)
+    function gmt_iso8601($timestamp)
     {
-        return (new \DateTime(null, new \DateTimeZone('UTC')))->setTimestamp($time)->format('Y-m-d\TH:i:s\Z');
+        return (new \DateTime())->setTimezone(new \DateTimeZone('UTC'))->setTimestamp($timestamp)->format('Y-m-d\TH:i:s\Z');
     }
 }
 ```
